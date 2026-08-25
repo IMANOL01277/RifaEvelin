@@ -3,875 +3,418 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Rifa Moto Ofero Eléctrica – Evelin Martinez</title>
-  <meta name="description" content="Rifa de una moto eléctrica Ofero 100% eléctrica. Valor: $40.000 pesos. Con las dos últimas cifras del Sinuano Noche del 30 de octubre." />
-
-  <!-- Bootstrap 5 CSS -->
+  <title>Rifa Moto Ofero Electrica - Evelin Martinez</title>
+  <meta name="description" content="Rifa de una moto electrica Ofero 100% electrica. Valor: 40.000 pesos. Con las dos ultimas cifras del Sinuano Noche del 30 de octubre." />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
-  <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
   <style>
-    /* ===== DESIGN TOKENS ===== */
-    :root {
-      --green:       #4ade80;
-      --green-dark:  #22c55e;
-      --green-glow:  #16a34a;
-      --neon:        #00ff88;
-      --bg:          #0a0a0a;
-      --bg2:         #111111;
-      --bg3:         #1a1a1a;
-      --card:        #161616;
-      --border:      #2a2a2a;
-      --text:        #f0f0f0;
-      --muted:       #888;
-      --gold:        #fbbf24;
-    }
+    :root{--green:#4ade80;--green-dark:#22c55e;--green-glow:#16a34a;--neon:#00ff88;--bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--card:#161616;--border:#2a2a2a;--text:#f0f0f0;--muted:#888;--gold:#fbbf24;}
+    html,body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(34,197,94,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 90%,rgba(74,222,128,.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+    #winner-banner{display:none;background:linear-gradient(135deg,#1a0f00,#2d1800,#1a0f00);border-bottom:3px solid var(--gold);animation:winnerPulse 2s ease-in-out infinite;}
+    #winner-banner.visible{display:block;}
+    @keyframes winnerPulse{0%,100%{box-shadow:0 0 30px rgba(251,191,36,.2);}50%{box-shadow:0 0 60px rgba(251,191,36,.5);}}
+    .winner-number{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,22vw,130px);line-height:1;color:var(--gold);text-shadow:0 0 40px rgba(251,191,36,.9),0 0 80px rgba(251,191,36,.4);animation:numGlow 1.5s ease-in-out infinite alternate;}
+    @keyframes numGlow{from{text-shadow:0 0 40px rgba(251,191,36,.9),0 0 80px rgba(251,191,36,.4);}to{text-shadow:0 0 60px rgba(251,191,36,1),0 0 120px rgba(251,191,36,.7);}}
+    #winner-manual{display:none;background:var(--bg3);border-bottom:1px solid var(--border);}
+    #winner-manual.visible{display:block;}
+    #manual-number-input{background:var(--bg2);border:2px solid var(--border);color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:6px;text-align:center;border-radius:12px;width:90px;}
+    #manual-number-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(74,222,128,.25);background:var(--bg2);color:var(--text);}
+    .site-header{background:linear-gradient(180deg,#0d1f0d 0%,var(--bg2) 100%);border-bottom:2px solid rgba(74,222,128,.2);position:relative;z-index:5;}
+    .logo-circle{width:48px;height:48px;background:linear-gradient(135deg,var(--green-dark),var(--green-glow));border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:26px;color:#000;box-shadow:0 0 20px rgba(34,197,94,.5);flex-shrink:0;}
+    .site-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,34px);color:var(--neon);letter-spacing:2px;line-height:1;text-shadow:0 0 15px rgba(0,255,136,.5);}
+    .badge-date{background:linear-gradient(135deg,var(--green-dark),var(--green-glow));color:#000;font-weight:700;font-size:11px;border-radius:999px;letter-spacing:1px;}
+    .price-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,30px);color:var(--green);text-shadow:0 0 12px rgba(74,222,128,.5);}
+    .stats-bar{background:var(--bg3);border-bottom:1px solid var(--border);position:relative;z-index:5;}
+    .stat-value{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:var(--green);}
+    .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+    .progress{background:var(--border);height:10px;border-radius:999px;}
+    .progress-bar{background:linear-gradient(90deg,var(--green-glow),var(--neon));border-radius:999px;box-shadow:0 0 10px rgba(0,255,136,.5);transition:width .6s cubic-bezier(.34,1.56,.64,1);}
+    .actions-wrap{position:relative;z-index:5;}
+    .btn-green{background:linear-gradient(135deg,var(--green-dark),var(--green-glow));color:#000;font-weight:700;border:none;border-radius:12px;box-shadow:0 4px 15px rgba(34,197,94,.3);transition:transform .2s,box-shadow .2s;}
+    .btn-green:hover,.btn-green:focus{transform:translateY(-2px);box-shadow:0 6px 25px rgba(34,197,94,.5);color:#000;}
+    .btn-outline-green{background:transparent;color:var(--green);border:2px solid rgba(74,222,128,.4);border-radius:12px;font-weight:600;transition:all .2s;}
+    .btn-outline-green:hover{background:rgba(74,222,128,.1);border-color:var(--green);color:var(--green);}
+    .btn-outline-danger-soft{background:transparent;color:#f87171;border:2px solid rgba(248,113,113,.3);border-radius:12px;font-weight:600;font-size:13px;transition:all .2s;}
+    .btn-outline-danger-soft:hover{background:rgba(248,113,113,.1);border-color:#f87171;color:#f87171;}
+    .board-card{background:linear-gradient(160deg,#0d1f0d,#0a0a0a 60%,#0d1a0d);border:2px solid rgba(74,222,128,.2);border-radius:20px;box-shadow:0 0 0 1px rgba(74,222,128,.04),0 20px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(74,222,128,.08);position:relative;z-index:5;}
+    .board-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,4vw,26px);color:var(--neon);letter-spacing:2px;text-shadow:0 0 15px rgba(0,255,136,.4);}
+    .board-sub{font-size:11px;color:rgba(74,222,128,.7);letter-spacing:1px;}
+    #numbers-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;}
+    .num-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:clamp(12px,3vw,20px);color:var(--text);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:all .22s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}
+    .num-cell:active{transform:scale(.92);}
+    @media(hover:hover){.num-cell:hover{border-color:rgba(74,222,128,.5);transform:scale(1.1);box-shadow:0 0 14px rgba(74,222,128,.25);z-index:2;}}
+    .num-cell.sold{background:rgba(34,197,94,.13);border-color:var(--green-dark);color:var(--green);box-shadow:0 0 10px rgba(34,197,94,.25),inset 0 1px 0 rgba(74,222,128,.15);animation:pop .3s cubic-bezier(.34,1.56,.64,1);}
+    @keyframes pop{0%{transform:scale(.8);}60%{transform:scale(1.12);}100%{transform:scale(1);}}
+    .num-cell.sold::after{content:'checkmark';content:'';position:absolute;top:1px;right:3px;font-size:8px;color:var(--green);font-family:'Inter',sans-serif;font-weight:700;}
+    .num-cell.winner-cell{background:rgba(251,191,36,.18)!important;border-color:var(--gold)!important;color:var(--gold)!important;box-shadow:0 0 18px rgba(251,191,36,.5)!important;animation:winCell 1.5s ease-in-out infinite!important;}
+    @keyframes winCell{0%,100%{box-shadow:0 0 18px rgba(251,191,36,.5);}50%{box-shadow:0 0 32px rgba(251,191,36,.85);}}
+    .legend-dot{width:16px;height:16px;border-radius:4px;border:1.5px solid;flex-shrink:0;}
+    .legend-dot.avail{background:var(--bg3);border-color:var(--border);}
+    .legend-dot.taken{background:rgba(34,197,94,.13);border-color:var(--green-dark);}
+    .legend-dot.golden{background:rgba(251,191,36,.18);border-color:var(--gold);}
+    .site-footer{background:var(--bg3);border-top:1px solid var(--border);position:relative;z-index:5;}
+    .footer-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);letter-spacing:2px;}
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1.5px solid rgba(74,222,128,.3);color:var(--text);padding:12px 22px;border-radius:12px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.5);z-index:2000;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;white-space:nowrap;max-width:90vw;text-align:center;}
+    #toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    #loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1500;align-items:center;justify-content:center;flex-direction:column;gap:16px;backdrop-filter:blur(4px);}
+    #loading-overlay.visible{display:flex;}
+    .spinner-green{width:48px;height:48px;border:4px solid rgba(74,222,128,.2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;}
+    @media(max-width:400px){#numbers-grid{gap:3px;}.num-cell{border-radius:5px;}}
 
-    /* ===== BASE ===== */
-    html, body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(34,197,94,.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(74,222,128,.04) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ===== WINNER BANNER ===== */
-    #winner-banner {
-      display: none;
-      background: linear-gradient(135deg, #1a0f00, #2d1800, #1a0f00);
-      border-bottom: 3px solid var(--gold);
-      animation: winnerPulse 2s ease-in-out infinite;
-    }
-    #winner-banner.visible { display: block; }
-
-    @keyframes winnerPulse {
-      0%,100% { box-shadow: 0 0 30px rgba(251,191,36,.2); }
-      50%      { box-shadow: 0 0 60px rgba(251,191,36,.5); }
-    }
-
-    .winner-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 22vw, 130px);
-      line-height: 1;
-      color: var(--gold);
-      text-shadow: 0 0 40px rgba(251,191,36,.9), 0 0 80px rgba(251,191,36,.4);
-      animation: numGlow 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes numGlow {
-      from { text-shadow: 0 0 40px rgba(251,191,36,.9), 0 0 80px rgba(251,191,36,.4); }
-      to   { text-shadow: 0 0 60px rgba(251,191,36,1),  0 0 120px rgba(251,191,36,.7); }
-    }
-
-    /* ===== MANUAL WINNER ===== */
-    #winner-manual {
-      display: none;
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-    }
-    #winner-manual.visible { display: block; }
-
-    #manual-number-input {
-      background: var(--bg2);
-      border: 2px solid var(--border);
-      color: var(--text);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 6px;
-      text-align: center;
-      border-radius: 12px;
-      width: 90px;
-    }
-    #manual-number-input:focus {
-      outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(74,222,128,.25);
-      background: var(--bg2);
-      color: var(--text);
-    }
-
-    /* ===== HEADER ===== */
-    .site-header {
-      background: linear-gradient(180deg, #0d1f0d 0%, var(--bg2) 100%);
-      border-bottom: 2px solid rgba(74,222,128,.2);
-      position: relative;
-      z-index: 5;
-    }
-
-    .logo-circle {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-glow));
-      border-radius: 50%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
-      color: #000;
-      box-shadow: 0 0 20px rgba(34,197,94,.5);
-      flex-shrink: 0;
-    }
-
-    .site-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(20px, 5vw, 34px);
-      color: var(--neon);
-      letter-spacing: 2px;
-      line-height: 1;
-      text-shadow: 0 0 15px rgba(0,255,136,.5);
-    }
-
-    .badge-date {
-      background: linear-gradient(135deg, var(--green-dark), var(--green-glow));
-      color: #000;
-      font-weight: 700;
-      font-size: 11px;
-      border-radius: 999px;
-      letter-spacing: 1px;
-    }
-
-    .price-tag {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(22px, 5vw, 30px);
-      color: var(--green);
-      text-shadow: 0 0 12px rgba(74,222,128,.5);
-    }
-
-    /* ===== STATS ===== */
-    .stats-bar {
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-      position: relative; z-index: 5;
-    }
-
-    .stat-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      line-height: 1;
-      color: var(--green);
-    }
-
-    .stat-label {
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .progress {
-      background: var(--border);
-      height: 10px;
-      border-radius: 999px;
-    }
-
-    .progress-bar {
-      background: linear-gradient(90deg, var(--green-glow), var(--neon));
-      border-radius: 999px;
-      box-shadow: 0 0 10px rgba(0,255,136,.5);
-      transition: width .6s cubic-bezier(.34,1.56,.64,1);
-    }
-
-    /* ===== ACTION BUTTONS ===== */
-    .actions-wrap { position: relative; z-index: 5; }
-
-    .btn-green {
-      background: linear-gradient(135deg, var(--green-dark), var(--green-glow));
-      color: #000;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(34,197,94,.3);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-green:hover, .btn-green:focus {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(34,197,94,.5);
-      color: #000;
-    }
-
-    .btn-outline-green {
-      background: transparent;
-      color: var(--green);
-      border: 2px solid rgba(74,222,128,.4);
-      border-radius: 12px;
-      font-weight: 600;
-      transition: all .2s;
-    }
-    .btn-outline-green:hover {
-      background: rgba(74,222,128,.1);
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .btn-outline-danger-soft {
-      background: transparent;
-      color: #f87171;
-      border: 2px solid rgba(248,113,113,.3);
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 13px;
-      transition: all .2s;
-    }
-    .btn-outline-danger-soft:hover {
-      background: rgba(248,113,113,.1);
-      border-color: #f87171;
-      color: #f87171;
-    }
-
-    /* ===== BOARD CARD ===== */
-    .board-card {
-      background: linear-gradient(160deg, #0d1f0d, #0a0a0a 60%, #0d1a0d);
-      border: 2px solid rgba(74,222,128,.2);
-      border-radius: 20px;
-      box-shadow:
-        0 0 0 1px rgba(74,222,128,.04),
-        0 20px 60px rgba(0,0,0,.6),
-        inset 0 1px 0 rgba(74,222,128,.08);
-      position: relative; z-index: 5;
-    }
-
-    .board-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(16px, 4vw, 26px);
-      color: var(--neon);
-      letter-spacing: 2px;
-      text-shadow: 0 0 15px rgba(0,255,136,.4);
-    }
-
-    .board-sub {
-      font-size: 11px;
-      color: rgba(74,222,128,.7);
-      letter-spacing: 1px;
-    }
-
-    /* ===== NUMBER GRID ===== */
-    #numbers-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 5px;
-    }
-
-    .num-cell {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg3);
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(12px, 3vw, 20px);
-      color: var(--text);
-      cursor: pointer;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      transition: all .22s cubic-bezier(.34,1.56,.64,1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .num-cell:active { transform: scale(.92); }
-
-    @media (hover: hover) {
-      .num-cell:hover {
-        border-color: rgba(74,222,128,.5);
-        transform: scale(1.1);
-        box-shadow: 0 0 14px rgba(74,222,128,.25);
-        z-index: 2;
-      }
-    }
-
-    .num-cell.sold {
-      background: rgba(34,197,94,.13);
-      border-color: var(--green-dark);
-      color: var(--green);
-      box-shadow: 0 0 10px rgba(34,197,94,.25), inset 0 1px 0 rgba(74,222,128,.15);
-      animation: pop .3s cubic-bezier(.34,1.56,.64,1);
-    }
-
-    @keyframes pop {
-      0%   { transform: scale(.8); }
-      60%  { transform: scale(1.12); }
-      100% { transform: scale(1); }
-    }
-
-    .num-cell.sold::after {
-      content: '✓';
-      position: absolute;
-      top: 1px; right: 3px;
-      font-size: 8px;
-      color: var(--green);
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-    }
-
-    .num-cell.winner-cell {
-      background: rgba(251,191,36,.18) !important;
-      border-color: var(--gold) !important;
-      color: var(--gold) !important;
-      box-shadow: 0 0 18px rgba(251,191,36,.5) !important;
-      animation: winCell 1.5s ease-in-out infinite !important;
-    }
-
-    @keyframes winCell {
-      0%,100% { box-shadow: 0 0 18px rgba(251,191,36,.5); }
-      50%      { box-shadow: 0 0 32px rgba(251,191,36,.85); }
-    }
-
-    /* ===== LEGEND ===== */
-    .legend-dot {
-      width: 16px; height: 16px;
-      border-radius: 4px;
-      border: 1.5px solid;
-      flex-shrink: 0;
-    }
-    .legend-dot.avail  { background: var(--bg3); border-color: var(--border); }
-    .legend-dot.taken  { background: rgba(34,197,94,.13); border-color: var(--green-dark); }
-    .legend-dot.golden { background: rgba(251,191,36,.18); border-color: var(--gold); }
-
-    /* ===== FOOTER ===== */
-    .site-footer {
-      background: var(--bg3);
-      border-top: 1px solid var(--border);
-      position: relative; z-index: 5;
-    }
-
-    .footer-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      color: var(--green);
-      letter-spacing: 2px;
-    }
-
-    /* ===== TOAST ===== */
-    #toast {
-      position: fixed;
-      bottom: 24px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--card);
-      border: 1.5px solid rgba(74,222,128,.3);
-      color: var(--text);
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-size: 14px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.5);
-      z-index: 2000;
-      transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s;
-      opacity: 0;
-      white-space: nowrap;
-      max-width: 90vw;
-      text-align: center;
-    }
-    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-    /* ===== LOADING ===== */
-    #loading-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.75);
-      z-index: 1500;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 16px;
-      backdrop-filter: blur(4px);
-    }
-    #loading-overlay.visible { display: flex; }
-
-    .spinner-green {
-      width: 48px; height: 48px;
-      border: 4px solid rgba(74,222,128,.2);
-      border-top-color: var(--green);
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ===== CONFETTI ===== */
-    #confetti-canvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* ===== MOBILE TWEAKS ===== */
-    @media (max-width: 400px) {
-      #numbers-grid { gap: 3px; }
-      .num-cell { border-radius: 5px; }
-    }
+    /* ===== POSTER DE DESCARGA ===== */
+    #download-poster{position:fixed;top:-9999px;left:-9999px;width:1080px;background:#0d0d0d;font-family:'Inter',sans-serif;color:#f0f0f0;overflow:hidden;z-index:-10;}
+    .poster-row{display:flex;width:100%;min-height:600px;}
+    .poster-left{width:370px;flex-shrink:0;background:linear-gradient(160deg,#071a07 0%,#0d150d 100%);border-right:3px solid #22c55e;display:flex;flex-direction:column;align-items:center;padding:26px 18px 18px;position:relative;overflow:hidden;}
+    .poster-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(34,197,94,.1),transparent 70%);}
+    .poster-brand{display:flex;align-items:center;gap:8px;margin-bottom:2px;position:relative;}
+    .poster-brand-circle{width:36px;height:36px;background:linear-gradient(135deg,#22c55e,#16a34a);border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#000;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(34,197,94,.6);}
+    .poster-se-rifa{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#ccc;letter-spacing:4px;}
+    .poster-una{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#aaa;letter-spacing:3px;position:relative;}
+    .poster-moto-name{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#00ff88;line-height:.9;letter-spacing:1px;text-shadow:0 0 24px rgba(0,255,136,.5);position:relative;text-align:center;}
+    .poster-electric{background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;font-weight:900;font-size:12px;padding:4px 16px;border-radius:999px;letter-spacing:2px;margin:8px 0 10px;display:inline-block;position:relative;}
+    .poster-moto-img{width:310px;height:185px;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,200,100,.35));position:relative;}
+    .poster-features{width:100%;margin:8px 0;position:relative;}
+    .poster-feat-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#ccc;margin-bottom:5px;}
+    .poster-feat-icon{color:#22c55e;font-size:13px;width:18px;text-align:center;}
+    .poster-valor-label{font-size:11px;color:#888;letter-spacing:2px;text-transform:uppercase;margin-top:6px;position:relative;}
+    .poster-valor-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#22c55e;line-height:1;text-shadow:0 0 18px rgba(34,197,94,.5);position:relative;}
+    .poster-valor-pesos{font-size:13px;color:#888;position:relative;}
+    .poster-participa{background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;font-weight:900;font-size:13px;padding:8px 22px;border-radius:10px;letter-spacing:1px;margin-top:10px;text-align:center;position:relative;}
+    .poster-right{flex:1;display:flex;flex-direction:column;padding:18px 16px 14px;background:#0d0d0d;}
+    .poster-date-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+    .poster-cal-icon{font-size:26px;}
+    .poster-para-el{font-family:'Bebas Neue',sans-serif;font-size:12px;color:#888;letter-spacing:3px;line-height:1;}
+    .poster-date-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#f0f0f0;letter-spacing:1px;line-height:1;}
+    .poster-sinuano-bar{background:#111;border:1.5px solid #22c55e;border-radius:8px;padding:6px 14px;margin-bottom:12px;font-size:11px;font-weight:700;color:#f0f0f0;letter-spacing:1px;text-align:center;text-transform:uppercase;}
+    .poster-sinuano-bar span{color:#22c55e;}
+    #poster-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;flex:1;}
+    .p-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1.5px solid #2a2a2a;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:19px;color:#e0e0e0;background:#1a1a1a;}
+    .p-cell.p-sold{background:rgba(34,197,94,.15);border-color:#22c55e;color:#4ade80;box-shadow:inset 0 0 6px rgba(34,197,94,.2);}
+    .p-cell.p-winner{background:rgba(251,191,36,.2)!important;border-color:#fbbf24!important;color:#fbbf24!important;box-shadow:0 0 12px rgba(251,191,36,.6)!important;}
+    .poster-footer{background:#0d1a0d;border-top:2px solid #22c55e;display:flex;align-items:center;justify-content:center;gap:20px;padding:12px 24px;flex-wrap:wrap;}
+    .poster-footer-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#f0f0f0;letter-spacing:2px;}
+    .poster-footer-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;}
+    .poster-footer-phone{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#22c55e;letter-spacing:2px;}
+    .poster-divider{width:2px;height:36px;background:#22c55e;opacity:.4;border-radius:2px;}
   </style>
 </head>
 <body>
-
-<!-- Canvas confetti -->
 <canvas id="confetti-canvas"></canvas>
-
-<!-- Loading overlay -->
 <div id="loading-overlay">
   <div class="spinner-green"></div>
-  <div class="text-center" style="color:var(--green);font-weight:600;font-size:14px;">Generando imagen...</div>
+  <div style="color:var(--green);font-weight:600;font-size:14px;">Generando poster para WhatsApp...</div>
 </div>
-
-<!-- Toast -->
 <div id="toast"></div>
 
-<!-- =========================================================
-     WINNER BANNER
-     ========================================================= -->
-<div id="winner-banner" class="text-center py-4 px-3">
-  <div class="text-uppercase fw-bold mb-1"
-       style="color:var(--gold);letter-spacing:3px;font-size:clamp(13px,3.5vw,18px);text-shadow:0 0 20px rgba(251,191,36,.8);">
-    🏆 NÚMERO GANADOR · SINUANO NOCHE · 30 DE OCTUBRE 🏆
-  </div>
-  <div class="winner-number" id="winner-display">--</div>
-  <div style="color:rgba(251,191,36,.75);font-size:13px;">
-    Últimas 2 cifras del resultado de la Lotería Sinuano Noche
-  </div>
-</div>
-
-<!-- =========================================================
-     MANUAL WINNER ENTRY
-     ========================================================= -->
-<div id="winner-manual" class="py-3 px-3 text-center">
-  <p class="mb-1" style="color:var(--green);font-weight:700;font-size:14px;">🎰 ¡Es el día del sorteo! (30 de Octubre)</p>
-  <p class="mb-2" style="color:var(--muted);font-size:13px;">
-    Consulta el resultado de la <strong style="color:var(--green);">Lotería Sinuano Noche</strong> e ingresa
-    las <strong style="color:var(--green);">últimas 2 cifras</strong> del número ganador:
-  </p>
-  <p class="mb-3" style="color:#555;font-size:11px;">
-    Ejemplo: si el resultado fue <strong style="color:var(--text);">4.523</strong>, ingresa <strong style="color:var(--green);">23</strong>
-  </p>
-  <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
-    <input type="text" id="manual-number-input" maxlength="2" placeholder="00" inputmode="numeric" pattern="[0-9]*" />
-    <button class="btn btn-green px-3 py-2" onclick="setWinnerManually()">
-      <i class="bi bi-trophy-fill me-1"></i> Revelar Ganador
-    </button>
-    <button class="btn btn-outline-green px-3 py-2" onclick="dismissManual()">Después</button>
-  </div>
-</div>
-
-<!-- =========================================================
-     HEADER
-     ========================================================= -->
-<header class="site-header py-3 px-3">
-  <div class="container-fluid px-0" style="max-width:960px;margin:auto;">
-
-    <!-- Row 1: Logo + Title -->
-    <div class="d-flex align-items-center gap-3 mb-2">
-      <div class="logo-circle d-flex align-items-center justify-content-center">F</div>
-      <div class="flex-grow-1 min-width-0">
-        <div class="site-title">SE RIFA UNA MOTO OFERO</div>
-        <div style="font-size:11px;color:var(--muted);">
-          ⚡ <span style="color:var(--green);font-weight:600;">100% ELÉCTRICA</span>
-          · Batería Litio · Gran Autonomía · Carga Fácil
+<!-- POSTER OCULTO PARA DESCARGA -->
+<div id="download-poster">
+  <div class="poster-row">
+    <div class="poster-left">
+      <div class="poster-brand">
+        <div class="poster-brand-circle">F</div>
+        <div class="poster-se-rifa">SE RIFA</div>
+      </div>
+      <div class="poster-una">UNA</div>
+      <div class="poster-moto-name">ofero</div>
+      <div class="poster-electric">&#9889; 100% ELECTRICA!</div>
+      <img class="poster-moto-img" src="moto.jpg" alt="Moto Ofero" crossorigin="anonymous" />
+      <div class="poster-features">
+        <div class="poster-feat-item"><span class="poster-feat-icon">&#128267;</span><span>Bateria de litio</span></div>
+        <div class="poster-feat-item"><span class="poster-feat-icon">&#128205;</span><span>Gran autonomia</span></div>
+        <div class="poster-feat-item"><span class="poster-feat-icon">&#9851;</span><span>Economica y ecologica</span></div>
+        <div class="poster-feat-item"><span class="poster-feat-icon">&#9889;</span><span>Carga facil</span></div>
+      </div>
+      <div class="poster-valor-label">VALOR</div>
+      <div class="poster-valor-num">40.000</div>
+      <div class="poster-valor-pesos">PESOS</div>
+      <div class="poster-participa">PARTICIPA Y GANA!</div>
+    </div>
+    <div class="poster-right">
+      <div class="poster-date-header">
+        <span class="poster-cal-icon">&#128197;</span>
+        <div>
+          <div class="poster-para-el">PARA EL DIA</div>
+          <div class="poster-date-num">30 DE OCTUBRE</div>
         </div>
       </div>
+      <div class="poster-sinuano-bar">
+        CON LAS DOS ULTIMAS CIFRAS DEL <span>SINUANO NOCHE</span>
+      </div>
+      <div id="poster-grid"></div>
     </div>
+  </div>
+  <div class="poster-footer">
+    <div>
+      <div class="poster-footer-label">RESPONSABLE</div>
+      <div class="poster-footer-name">Evelin Martinez</div>
+    </div>
+    <div class="poster-divider"></div>
+    <div>
+      <div class="poster-footer-label">WHATSAPP</div>
+      <div class="poster-footer-phone">3126704493</div>
+    </div>
+  </div>
+</div>
 
-    <!-- Row 2: Badges + Contact -->
+<!-- WINNER BANNER -->
+<div id="winner-banner" class="text-center py-4 px-3">
+  <div class="text-uppercase fw-bold mb-1" style="color:var(--gold);letter-spacing:3px;font-size:clamp(13px,3.5vw,18px);text-shadow:0 0 20px rgba(251,191,36,.8);">
+    NUMERO GANADOR - SINUANO NOCHE - 30 DE OCTUBRE
+  </div>
+  <div class="winner-number" id="winner-display">--</div>
+  <div style="color:rgba(251,191,36,.75);font-size:13px;">Ultimas 2 cifras del resultado de la Loteria Sinuano Noche</div>
+</div>
+
+<!-- MANUAL WINNER -->
+<div id="winner-manual" class="py-3 px-3 text-center">
+  <p class="mb-1" style="color:var(--green);font-weight:700;font-size:14px;">Es el dia del sorteo! (30 de Octubre)</p>
+  <p class="mb-2" style="color:var(--muted);font-size:13px;">
+    Consulta el resultado de la <a href="https://www.colombia.com/loterias/sinuano-noche" target="_blank" style="color:var(--green);font-weight:bold;text-decoration:underline;">Lotería Sinuano Noche aquí</a> e ingresa las <strong style="color:var(--green);">últimas 2 cifras</strong>:
+  </p>
+  <p class="mb-3" style="color:#555;font-size:11px;">Ej: si el resultado fue <strong style="color:var(--text);">4.523</strong>, ingresa <strong style="color:var(--green);">23</strong></p>
+  <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
+    <input type="text" id="manual-number-input" maxlength="2" placeholder="00" inputmode="numeric" pattern="[0-9]*" />
+    <button class="btn btn-green px-3 py-2" onclick="setWinnerManually()"><i class="bi bi-trophy-fill me-1"></i>Revelar Ganador</button>
+    <button class="btn btn-outline-green px-3 py-2" onclick="dismissManual()">Despues</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header py-3 px-3">
+  <div class="container-fluid px-0" style="max-width:960px;margin:auto;">
+    <div class="d-flex align-items-center gap-3 mb-2">
+      <div class="logo-circle d-flex align-items-center justify-content-center">F</div>
+      <div class="flex-grow-1">
+        <div class="site-title">SE RIFA UNA MOTO OFERO</div>
+        <div style="font-size:11px;color:var(--muted);">&#9889; <span style="color:var(--green);font-weight:600;">100% ELECTRICA</span> - Bateria Litio - Gran Autonomia - Carga Facil</div>
+      </div>
+    </div>
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
       <div class="d-flex align-items-center gap-2 flex-wrap">
-        <span class="badge badge-date px-3 py-2">
-          <i class="bi bi-calendar-event me-1"></i>30 DE OCTUBRE
-        </span>
+        <span class="badge badge-date px-3 py-2"><i class="bi bi-calendar-event me-1"></i>30 DE OCTUBRE</span>
         <span class="price-tag">$40.000 PESOS</span>
       </div>
       <div class="d-flex align-items-center gap-2" style="font-size:12px;color:var(--muted);">
         <i class="bi bi-person-circle" style="color:var(--green);"></i>
         <span>Evelin Martinez</span>
-        <a href="https://wa.me/573126704493" target="_blank"
-           class="d-flex align-items-center gap-1 text-decoration-none"
-           style="color:var(--green);font-weight:600;">
-          <i class="bi bi-whatsapp"></i> 3126704493
-        </a>
+        <a href="https://wa.me/573126704493" target="_blank" class="d-flex align-items-center gap-1 text-decoration-none" style="color:var(--green);font-weight:600;"><i class="bi bi-whatsapp"></i> 3126704493</a>
       </div>
     </div>
-
   </div>
 </header>
 
-<!-- =========================================================
-     STATS BAR
-     ========================================================= -->
+<!-- STATS BAR -->
 <div class="stats-bar py-3 px-3">
   <div class="container-fluid px-0" style="max-width:960px;margin:auto;">
-
-    <!-- Stats numbers -->
     <div class="row g-0 text-center mb-2">
-      <div class="col-4">
-        <div class="stat-value" id="stat-sold">0</div>
-        <div class="stat-label">Vendidos</div>
-      </div>
-      <div class="col-4">
-        <div class="stat-value" id="stat-avail">100</div>
-        <div class="stat-label">Disponibles</div>
-      </div>
-      <div class="col-4">
-        <div class="stat-value" id="stat-pct">0%</div>
-        <div class="stat-label">Completado</div>
-      </div>
+      <div class="col-4"><div class="stat-value" id="stat-sold">0</div><div class="stat-label">Vendidos</div></div>
+      <div class="col-4"><div class="stat-value" id="stat-avail">100</div><div class="stat-label">Disponibles</div></div>
+      <div class="col-4"><div class="stat-value" id="stat-pct">0%</div><div class="stat-label">Completado</div></div>
     </div>
-
-    <!-- Progress bar -->
-    <div class="d-flex justify-content-between mb-1" style="font-size:11px;color:var(--muted);">
-      <span>Progreso de la rifa</span>
-      <span id="stat-label-count">0 / 100</span>
-    </div>
-    <div class="progress">
-      <div class="progress-bar" id="progress-fill" style="width:0%;" role="progressbar"></div>
-    </div>
-
+    <div class="d-flex justify-content-between mb-1" style="font-size:11px;color:var(--muted);"><span>Progreso de la rifa</span><span id="stat-label-count">0 / 100</span></div>
+    <div class="progress"><div class="progress-bar" id="progress-fill" style="width:0%;" role="progressbar"></div></div>
   </div>
 </div>
 
-<!-- =========================================================
-     ACTION BUTTONS
-     ========================================================= -->
+<!-- ACTIONS -->
 <div class="actions-wrap py-3 px-3">
   <div class="container-fluid px-0" style="max-width:960px;margin:auto;">
-
-    <!-- Top row: Download + WhatsApp -->
     <div class="d-flex gap-2 flex-wrap mb-2">
-      <button class="btn btn-green flex-grow-1 py-2" id="download-btn" onclick="downloadBoard()">
-        <i class="bi bi-download me-1"></i> Descargar Imagen
-      </button>
-      <button class="btn btn-outline-green flex-grow-1 py-2" onclick="shareWhatsApp()">
-        <i class="bi bi-whatsapp me-1"></i> Compartir
-      </button>
+      <button class="btn btn-green flex-grow-1 py-2" onclick="downloadBoard()"><i class="bi bi-download me-1"></i>Descargar Poster</button>
+      <button class="btn btn-outline-green flex-grow-1 py-2" onclick="shareWhatsApp()"><i class="bi bi-whatsapp me-1"></i>Compartir</button>
     </div>
-
-    <!-- Bottom row: hint + reset -->
     <div class="d-flex align-items-center justify-content-between gap-2">
-      <small style="color:var(--muted);">
-        <i class="bi bi-hand-index-thumb me-1"></i>Toca un número para marcarlo
-      </small>
-      <button class="btn btn-outline-danger-soft py-1 px-3" onclick="confirmReset()">
-        <i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar
-      </button>
+      <small style="color:var(--muted);"><i class="bi bi-hand-index-thumb me-1"></i>Toca un numero para marcarlo como vendido</small>
+      <button class="btn btn-outline-danger-soft py-1 px-3" onclick="confirmReset()"><i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar</button>
     </div>
-
   </div>
 </div>
 
-<!-- =========================================================
-     MAIN BOARD
-     ========================================================= -->
+<!-- TABLON INTERACTIVO -->
 <main class="px-3 pb-4">
   <div class="container-fluid px-0" style="max-width:960px;margin:auto;">
-
-    <div class="board-card p-3 p-sm-4" id="board-capture">
-
-      <!-- Board header (goes into screenshot) -->
+    <div class="board-card p-3 p-sm-4">
       <div class="text-center mb-3 pb-2" style="border-bottom:1px solid rgba(74,222,128,.12);">
-        <div class="board-headline">🏆 TABLÓN – MOTO OFERO ELÉCTRICA</div>
-        <div class="board-sub mt-1">
-          Gana con las 2 últimas cifras del resultado · Lotería Sinuano Noche · 30 de Octubre
-        </div>
-        <div class="board-sub" style="color:rgba(74,222,128,.5);margin-top:2px;">
-          Evelin Martinez · 3126704493
-        </div>
+        <div class="board-headline">TABLON - MOTO OFERO ELECTRICA</div>
+        <div class="board-sub mt-1">Gana con las 2 ultimas cifras del resultado - Loteria Sinuano Noche - 30 de Octubre</div>
+        <div class="board-sub" style="color:rgba(74,222,128,.5);margin-top:2px;">Evelin Martinez - 3126704493</div>
       </div>
-
-      <!-- Numbers grid -->
       <div id="numbers-grid"></div>
-
-      <!-- Legend -->
-      <div class="d-flex justify-content-center gap-3 flex-wrap mt-3 pt-2"
-           style="border-top:1px solid rgba(74,222,128,.08);">
-        <div class="d-flex align-items-center gap-2">
-          <div class="legend-dot avail"></div>
-          <span style="font-size:12px;color:var(--muted);">Disponible</span>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <div class="legend-dot taken"></div>
-          <span style="font-size:12px;color:var(--muted);">Vendido ✓</span>
-        </div>
-        <div class="d-flex align-items-center gap-2" id="legend-winner" style="display:none!important;">
-          <div class="legend-dot golden"></div>
-          <span style="font-size:12px;color:var(--muted);">Ganador 🏆</span>
-        </div>
+      <div class="d-flex justify-content-center gap-3 flex-wrap mt-3 pt-2" style="border-top:1px solid rgba(74,222,128,.08);">
+        <div class="d-flex align-items-center gap-2"><div class="legend-dot avail"></div><span style="font-size:12px;color:var(--muted);">Disponible</span></div>
+        <div class="d-flex align-items-center gap-2"><div class="legend-dot taken"></div><span style="font-size:12px;color:var(--muted);">Vendido</span></div>
+        <div class="d-flex align-items-center gap-2" id="legend-winner" style="display:none!important;"><div class="legend-dot golden"></div><span style="font-size:12px;color:var(--muted);">Ganador</span></div>
       </div>
-
-    </div><!-- /board-capture -->
+    </div>
   </div>
 </main>
 
-<!-- =========================================================
-     FOOTER
-     ========================================================= -->
+<!-- FOOTER -->
 <footer class="site-footer py-4 px-3 text-center">
   <div class="footer-name"><i class="bi bi-person-circle me-2"></i>Evelin Martinez</div>
-  <div style="font-size:13px;color:var(--muted);" class="mt-1">
-    <i class="bi bi-whatsapp me-1" style="color:var(--green);"></i>
-    <a href="https://wa.me/573126704493" target="_blank"
-       class="text-decoration-none" style="color:var(--green);font-weight:600;">3126704493</a>
-  </div>
-  <div style="font-size:11px;color:#444;" class="mt-2">
-    Gana con las 2 últimas cifras · Lotería Sinuano Noche · 30 de Octubre de 2025
-  </div>
+  <div style="font-size:13px;color:var(--muted);" class="mt-1"><i class="bi bi-whatsapp me-1" style="color:var(--green);"></i><a href="https://wa.me/573126704493" target="_blank" class="text-decoration-none" style="color:var(--green);font-weight:600;">3126704493</a></div>
+  <div style="font-size:11px;color:#444;" class="mt-2">Gana con las 2 ultimas cifras - Loteria Sinuano Noche - 30 de Octubre de 2025</div>
 </footer>
 
-<!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-// ============================================================
-//  CONSTANTS
-// ============================================================
-const STORAGE_KEY = 'rifa_evelin_sold_v2';
-const WINNER_KEY  = 'rifa_evelin_winner_v2';
-const DRAW_DATE   = new Date('2025-10-30T00:00:00');
+const STORAGE_KEY='rifa_evelin_sold_v2';
+const WINNER_KEY='rifa_evelin_winner_v2';
+const DRAW_DATE=new Date('2025-10-30T00:00:00');
+let soldNumbers=new Set();
+let winnerNumber=null;
 
-let soldNumbers  = new Set();
-let winnerNumber = null;
-
-// ============================================================
-//  INIT
-// ============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  loadStorage();
-  buildGrid();
-  updateStats();
-  checkWinnerState();
+document.addEventListener('DOMContentLoaded',()=>{
+  loadStorage();buildGrid();buildPosterGrid();updateStats();checkWinnerState();
 });
 
-// ============================================================
-//  STORAGE
-// ============================================================
-function loadStorage() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) soldNumbers = new Set(JSON.parse(raw));
-    const w = localStorage.getItem(WINNER_KEY);
-    if (w !== null) winnerNumber = w;
-  } catch(e) { soldNumbers = new Set(); winnerNumber = null; }
+function loadStorage(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw)soldNumbers=new Set(JSON.parse(raw));
+    const w=localStorage.getItem(WINNER_KEY);
+    if(w!==null)winnerNumber=w;
+  }catch(e){soldNumbers=new Set();winnerNumber=null;}
 }
+function saveStorage(){localStorage.setItem(STORAGE_KEY,JSON.stringify([...soldNumbers]));}
 
-function saveStorage() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([...soldNumbers]));
-}
-
-// ============================================================
-//  BUILD GRID
-// ============================================================
-function buildGrid() {
-  const grid = document.getElementById('numbers-grid');
-  grid.innerHTML = '';
-  for (let i = 0; i <= 99; i++) {
-    const n    = String(i).padStart(2,'0');
-    const cell = document.createElement('div');
-    cell.className       = 'num-cell';
-    cell.id              = 'cell-' + n;
-    cell.dataset.num     = n;
-    cell.textContent     = n;
-    cell.setAttribute('role', 'button');
-    cell.setAttribute('aria-label', 'Número ' + n);
-
-    if (soldNumbers.has(n))      cell.classList.add('sold');
-    if (winnerNumber === n)       cell.classList.add('winner-cell');
-
-    cell.addEventListener('click', () => toggleNumber(n, cell));
+function buildGrid(){
+  const grid=document.getElementById('numbers-grid');grid.innerHTML='';
+  for(let i=0;i<=99;i++){
+    const n=String(i).padStart(2,'0');
+    const cell=document.createElement('div');
+    cell.className='num-cell';cell.id='cell-'+n;cell.dataset.num=n;cell.textContent=n;
+    cell.setAttribute('role','button');cell.setAttribute('aria-label','Numero '+n);
+    if(soldNumbers.has(n))cell.classList.add('sold');
+    if(winnerNumber===n)cell.classList.add('winner-cell');
+    cell.addEventListener('click',()=>toggleNumber(n,cell));
     grid.appendChild(cell);
   }
 }
 
-// ============================================================
-//  TOGGLE NUMBER
-// ============================================================
-function toggleNumber(n, cell) {
-  if (winnerNumber !== null && n === winnerNumber) return;
-
-  if (soldNumbers.has(n)) {
-    soldNumbers.delete(n);
-    cell.classList.remove('sold');
-    showToast('Número ' + n + ' marcado disponible');
-  } else {
-    soldNumbers.add(n);
-    cell.classList.add('sold');
-    showToast('✅ Número ' + n + ' vendido');
-  }
-  saveStorage();
-  updateStats();
-}
-
-// ============================================================
-//  STATS
-// ============================================================
-function updateStats() {
-  const s = soldNumbers.size;
-  const a = 100 - s;
-  document.getElementById('stat-sold').textContent  = s;
-  document.getElementById('stat-avail').textContent = a;
-  document.getElementById('stat-pct').textContent   = s + '%';
-  document.getElementById('stat-label-count').textContent = s + ' / 100';
-  document.getElementById('progress-fill').style.width    = s + '%';
-}
-
-// ============================================================
-//  WINNER
-// ============================================================
-function checkWinnerState() {
-  if (winnerNumber !== null) { showWinnerBanner(winnerNumber); return; }
-  if (new Date() >= DRAW_DATE) {
-    document.getElementById('winner-manual').classList.add('visible');
+function buildPosterGrid(){
+  const grid=document.getElementById('poster-grid');grid.innerHTML='';
+  for(let i=0;i<=99;i++){
+    const n=String(i).padStart(2,'0');
+    const cell=document.createElement('div');
+    cell.className='p-cell';cell.id='pcell-'+n;cell.textContent=n;
+    if(soldNumbers.has(n))cell.classList.add('p-sold');
+    if(winnerNumber===n)cell.classList.add('p-winner');
+    grid.appendChild(cell);
   }
 }
 
-function showWinnerBanner(num) {
-  document.getElementById('winner-display').textContent = num;
+function syncPosterGrid(){
+  for(let i=0;i<=99;i++){
+    const n=String(i).padStart(2,'0');
+    const cell=document.getElementById('pcell-'+n);
+    if(!cell)continue;
+    cell.className='p-cell';
+    if(soldNumbers.has(n))cell.classList.add('p-sold');
+    if(winnerNumber===n)cell.classList.add('p-winner');
+  }
+}
+
+function toggleNumber(n,cell){
+  if(winnerNumber!==null&&n===winnerNumber)return;
+  if(soldNumbers.has(n)){soldNumbers.delete(n);cell.classList.remove('sold');showToast('Numero '+n+' marcado disponible');}
+  else{soldNumbers.add(n);cell.classList.add('sold');showToast('Numero '+n+' vendido');}
+  saveStorage();updateStats();
+}
+
+function updateStats(){
+  const s=soldNumbers.size,a=100-s;
+  document.getElementById('stat-sold').textContent=s;
+  document.getElementById('stat-avail').textContent=a;
+  document.getElementById('stat-pct').textContent=s+'%';
+  document.getElementById('stat-label-count').textContent=s+' / 100';
+  document.getElementById('progress-fill').style.width=s+'%';
+}
+
+function checkWinnerState(){
+  if(winnerNumber!==null){showWinnerBanner(winnerNumber);return;}
+  if(new Date()>=DRAW_DATE)document.getElementById('winner-manual').classList.add('visible');
+}
+function showWinnerBanner(num){
+  document.getElementById('winner-display').textContent=num;
   document.getElementById('winner-banner').classList.add('visible');
   document.getElementById('winner-manual').classList.remove('visible');
-
-  const cell = document.getElementById('cell-' + num);
-  if (cell) { cell.classList.remove('sold'); cell.classList.add('winner-cell'); }
-
-  const lw = document.getElementById('legend-winner');
-  lw.style.setProperty('display', 'flex', 'important');
+  const cell=document.getElementById('cell-'+num);
+  if(cell){cell.classList.remove('sold');cell.classList.add('winner-cell');}
+  document.getElementById('legend-winner').style.setProperty('display','flex','important');
 }
-
-function setWinnerManually() {
-  let val = document.getElementById('manual-number-input').value.trim();
-  if (!/^\d{1,2}$/.test(val)) { showToast('⚠️ Ingresa un número del 00 al 99'); return; }
-  val = val.padStart(2,'0');
-  winnerNumber = val;
-  localStorage.setItem(WINNER_KEY, val);
-  showWinnerBanner(val);
-  launchConfetti();
-  showToast('🏆 ¡Ganador revelado: ' + val + '!');
+function setWinnerManually(){
+  let val=document.getElementById('manual-number-input').value.trim();
+  if(!/^\d{1,2}$/.test(val)){showToast('Ingresa un numero del 00 al 99');return;}
+  val=val.padStart(2,'0');winnerNumber=val;localStorage.setItem(WINNER_KEY,val);
+  showWinnerBanner(val);launchConfetti();showToast('Ganador revelado: '+val+'!');
 }
+function dismissManual(){document.getElementById('winner-manual').classList.remove('visible');}
 
-function dismissManual() {
-  document.getElementById('winner-manual').classList.remove('visible');
-}
-
-// ============================================================
-//  DOWNLOAD
-// ============================================================
-async function downloadBoard() {
+async function downloadBoard(){
   document.getElementById('loading-overlay').classList.add('visible');
-  try {
-    const board  = document.getElementById('board-capture');
-    const canvas = await html2canvas(board, {
-      backgroundColor: '#0a0a0a',
-      scale: 2.5,
-      useCORS: true,
-      logging: false
-    });
-    const link = document.createElement('a');
-    link.download = 'rifa-ofero-evelin-' + new Date().toISOString().slice(0,10) + '.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    showToast('📥 ¡Imagen descargada!');
-  } catch(e) {
-    showToast('❌ Error al generar la imagen');
-    console.error(e);
-  } finally {
-    document.getElementById('loading-overlay').classList.remove('visible');
-  }
+  try{
+    syncPosterGrid();
+    const motoImg=document.querySelector('#download-poster .poster-moto-img');
+    if(motoImg&&!motoImg.complete){
+      await new Promise(resolve=>{motoImg.onload=resolve;motoImg.onerror=resolve;setTimeout(resolve,3000);});
+    }
+    const poster=document.getElementById('download-poster');
+    poster.style.position='absolute';poster.style.top='-9999px';poster.style.left='0';poster.style.zIndex='0';
+    const canvas=await html2canvas(poster,{backgroundColor:'#0d0d0d',scale:2,useCORS:true,allowTaint:true,logging:false,width:poster.offsetWidth,height:poster.offsetHeight});
+    poster.style.position='fixed';poster.style.top='-9999px';poster.style.left='-9999px';poster.style.zIndex='-10';
+    const link=document.createElement('a');
+    link.download='rifa-ofero-evelin-'+new Date().toISOString().slice(0,10)+'.png';
+    link.href=canvas.toDataURL('image/png');link.click();
+    showToast('Poster descargado listo para WhatsApp!');
+  }catch(e){showToast('Error al generar la imagen');console.error(e);}
+  finally{document.getElementById('loading-overlay').classList.remove('visible');}
 }
 
-// ============================================================
-//  WHATSAPP SHARE
-// ============================================================
-function shareWhatsApp() {
-  const s = soldNumbers.size;
-  const text = encodeURIComponent(
-    '🏍️ *RIFA MOTO OFERO ELÉCTRICA*\n' +
-    '📅 30 de Octubre – Sinuano Noche\n' +
-    '💰 Valor: $40.000 pesos\n\n' +
-    '✅ Vendidos: ' + s + ' | 🔓 Disponibles: ' + (100 - s) + '\n\n' +
-    '📱 Contacto: 3126704493\n👤 Evelin Martinez'
-  );
-  window.open('https://wa.me/?text=' + text, '_blank');
+function shareWhatsApp(){
+  const s=soldNumbers.size;
+  const text=encodeURIComponent('RIFA MOTO OFERO ELECTRICA\n30 de Octubre - Sinuano Noche\nValor: $40.000 pesos\n\nVendidos: '+s+' | Disponibles: '+(100-s)+'\n\nContacto: 3126704493\nEvelin Martinez');
+  window.open('https://wa.me/?text='+text,'_blank');
 }
 
-// ============================================================
-//  RESET
-// ============================================================
-function confirmReset() {
-  if (!confirm('⚠️ ¿Reiniciar todos los números?\nEsta acción no se puede deshacer.')) return;
-  soldNumbers.clear(); winnerNumber = null;
-  localStorage.removeItem(STORAGE_KEY);
-  localStorage.removeItem(WINNER_KEY);
-  buildGrid(); updateStats();
+function confirmReset(){
+  if(!confirm('Reiniciar todos los numeros?\nEsta accion no se puede deshacer.'))return;
+  soldNumbers.clear();winnerNumber=null;
+  localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(WINNER_KEY);
+  buildGrid();buildPosterGrid();updateStats();
   document.getElementById('winner-banner').classList.remove('visible');
-  const lw = document.getElementById('legend-winner');
-  lw.style.setProperty('display', 'none', 'important');
-  showToast('🔄 Tablón reiniciado');
+  document.getElementById('legend-winner').style.setProperty('display','none','important');
+  showToast('Tablon reiniciado');
 }
 
-// ============================================================
-//  TOAST
-// ============================================================
 let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// ============================================================
-//  CONFETTI
-// ============================================================
-function launchConfetti() {
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx    = canvas.getContext('2d');
-  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  const colors = ['#4ade80','#22c55e','#fbbf24','#f59e0b','#ffffff','#00ff88'];
-  const pieces = Array.from({length:180}, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height - canvas.height,
-    r: Math.random() * 8 + 4,
-    d: Math.random() * 3 + 1,
-    color: colors[Math.floor(Math.random() * colors.length)],
-    tilt: 0, tiltAngle: 0,
-    tiltAngleInc: Math.random() * .07 + .05
-  }));
-  let frame = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pieces.forEach(p => {
-      ctx.beginPath();
-      ctx.lineWidth = p.r / 2;
-      ctx.strokeStyle = p.color;
-      ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
-      ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
-      ctx.stroke();
-      p.tiltAngle += p.tiltAngleInc;
-      p.y += (Math.cos(frame * .01 + p.d) + p.d) * 1.5;
-      p.tilt = Math.sin(p.tiltAngle) * 15;
-      if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
-    });
-    frame++;
-    if (frame < 320) requestAnimationFrame(draw);
-    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+function launchConfetti(){
+  const canvas=document.getElementById('confetti-canvas');const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const colors=['#4ade80','#22c55e','#fbbf24','#f59e0b','#ffffff','#00ff88'];
+  const pieces=Array.from({length:180},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*8+4,d:Math.random()*3+1,color:colors[Math.floor(Math.random()*colors.length)],tilt:0,tiltAngle:0,tiltAngleInc:Math.random()*.07+.05}));
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{ctx.beginPath();ctx.lineWidth=p.r/2;ctx.strokeStyle=p.color;ctx.moveTo(p.x+p.tilt+p.r/4,p.y);ctx.lineTo(p.x+p.tilt,p.y+p.tilt+p.r/4);ctx.stroke();p.tiltAngle+=p.tiltAngleInc;p.y+=(Math.cos(frame*.01+p.d)+p.d)*1.5;p.tilt=Math.sin(p.tiltAngle)*15;if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;}});
+    frame++;if(frame<320)requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);
   }
   draw();
 }
 
-// ============================================================
-//  INPUT HELPERS
-// ============================================================
-const inp = document.getElementById('manual-number-input');
-inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g,'').slice(0,2); });
-inp.addEventListener('keydown', e => { if (e.key === 'Enter') setWinnerManually(); });
+const inp=document.getElementById('manual-number-input');
+inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'').slice(0,2);});
+inp.addEventListener('keydown',e=>{if(e.key==='Enter')setWinnerManually();});
 </script>
 </body>
 </html>
